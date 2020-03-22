@@ -40,15 +40,15 @@ uint16_t tim_compare = FIRST_TOGGLE_TIME;
 int main(void) {
     mcu_init();
 
-    MX_TIM1_Init();
-    HAL_TIM_Base_Start_IT(&htim1);
+    MX_TIM6_Init();
+    HAL_TIM_Base_Start_IT(&htim6);
 
-    __HAL_TIM_SET_AUTORELOAD(&htim1, TIM_PERIOD);
+    __HAL_TIM_SET_AUTORELOAD(&htim6, TIM_PERIOD);
 
     HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
 
     for (;;) {
-        uint16_t tim_counter = __HAL_TIM_GET_COUNTER(&htim1);
+        uint16_t tim_counter = __HAL_TIM_GET_COUNTER(&htim6);
 
         if (tim_counter > tim_compare) {
             HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
@@ -61,7 +61,7 @@ int main(void) {
 }
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim) {
-    if (htim == &htim1) {
+    if (htim == &htim6) {
         ap_index = 1;
         tim_compare = FIRST_TOGGLE_TIME;
         HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);

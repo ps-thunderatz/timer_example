@@ -10,5 +10,5 @@ Além disso, `NUMBER_OF_TOGGLES` representa o índice do maior termo que a PA po
 
 | Pino | Nucleo | Configuração   | Função |
 |:---: |:---:   |:---            |:---    |
-| -    | -      | TIM1           | Timer em ms |
+| -    | -      | TIM6           | Timer em ms |
 | PA5  | D13    | GPIO Output    | Acender um LED |
