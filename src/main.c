@@ -24,12 +24,12 @@
  *****************************************/
 
 /**
- * @brief Variavel que guarda o tempo em ms até o proximo toggle do LED
+ * @brief Arithmetic progression actual term.
  */
-uint16_t toggle_time = FIRST_TOGGLE_TIME;
+uint8_t ap_index = 1;
 
 /**
- * @brief Variavel que guarda o valor a ser comparado com o counter do timer
+ * @brief Value to compare with timer counter.
  */
 uint16_t tim_compare = FIRST_TOGGLE_TIME;
 
@@ -52,8 +52,8 @@ int main(void) {
 
         if (tim_counter > tim_compare) {
             HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
-            toggle_time += TOGGLE_TIME_STEP;
-            tim_compare += toggle_time;
+            tim_compare += (FIRST_TOGGLE_TIME + TOGGLE_TIME_STEP * ap_index); /**< Sums the next term of the AP */
+            ap_index++;
         }
 
         /* Aqui o resto do código pode ser executado */
@@ -62,7 +62,7 @@ int main(void) {
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim) {
     if (htim == &htim1) {
-        toggle_time = FIRST_TOGGLE_TIME;
+        ap_index = 1;
         tim_compare = FIRST_TOGGLE_TIME;
         HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
     }
