@@ -11,9 +11,10 @@
  * Private Constants
  *****************************************/
 
-#define LED_ON_TIMES 4
+#define LED_ON_TIMES 5
 
-#define TOGGLE_TIME_STEP 150
+#define TOGGLE_TIME_START 150
+#define TOGGLE_TIME_STEP 75
 
 /*****************************************
  * Private Variables
@@ -27,7 +28,7 @@ uint8_t ap_index = 1;
 /**
  * @brief Value to compare with timer counter.
  */
-uint16_t tim_compare = TOGGLE_TIME_STEP;
+uint16_t tim_compare = TOGGLE_TIME_START;
 
 /*****************************************
  * Main Function
@@ -51,9 +52,8 @@ int main(void) {
                 HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
             }
 
+            tim_compare = TOGGLE_TIME_START + TOGGLE_TIME_STEP * ap_index;
             ap_index++;
-
-            tim_compare = TOGGLE_TIME_STEP * ap_index;
         }
 
         /* Aqui o resto do código pode ser executado */
