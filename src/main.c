@@ -21,7 +21,7 @@
  *****************************************/
 
 /**
- * @brief Arithmetic progression actual term.
+ * @brief Arithmetic progression actual term index.
  */
 uint8_t ap_index = 1;
 
@@ -38,13 +38,13 @@ int main(void) {
     mcu_init();
 
     MX_TIM6_Init();
-    HAL_TIM_Base_Start_IT(&htim6);
+    HAL_TIM_Base_Start(&htim6);
 
     HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
 
     for (;;) {
         if (__HAL_TIM_GET_COUNTER(&htim6) > tim_compare) {
-            __HAL_TIM_SET_COUNTER(&htim6, 0);
+            __HAL_TIM_SET_COUNTER(&htim6, 0); /**< Reset timer to start counting new toggle delay */
 
             if (ap_index > (LED_ON_TIMES * 2)) {
                 ap_index = 0;
