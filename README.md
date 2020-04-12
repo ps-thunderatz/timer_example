@@ -3,7 +3,7 @@
 Esse repositório contém um exemplo de como utilizar timers.
 
 Nesse exemplo, o tempo de toggle de um LED (tempo que ele pisca) é controlado por um timer.
-O tempo entre cada toggle segue uma PA de termo inicial `TOGGLE_TIME_START` e razão `TOGGLE_TIME_STEP`.
+O tempo entre cada toggle segue uma PA de termo inicial `TOGGLE_TIME_START_MS` e razão `TOGGLE_TIME_STEP_MS`.
 Além disso, `LED_ON_TIMES` representa o número de vezes que o LED irá acender.
 
 ## Descrição do cube e hardware
